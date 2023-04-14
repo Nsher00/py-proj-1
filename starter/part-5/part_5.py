@@ -4,6 +4,73 @@
 
 # Code here
 
+def new_book():
+    new_title = input('What is the name of the book you want to add?')
+    new_author = input('What is the name of the author of the book?')
+    try:
+        new_year = int(input('What year was the book published? '))
+    except:
+        new_year = int(input('Please enter a number for the year? '))
+    try:
+        new_rating = float(input('What is the rating of this book? '))
+    except:
+        new_rating = float(input('Please enter a number out of five for the rating '))
+    try:
+        new_pages = int(input('How many pages are in the book? '))
+    except:
+        new_pages = int(input('Enter a number for the amount of pages in the book. '))
+
+
+    with open ("library.txt", 'a') as f:
+        f.write(f'{new_title}, {new_author}, {new_year}, {new_rating}, {new_pages}\n')
+
+def open_library():
+    with open('library.txt', 'r') as f:
+        file = f.readlines()
+
+    for line in file:
+        new_title, new_author, new_year, new_rating, new_pages = line.split(', ')
+
+        book_dictionary = {
+            'title': new_title,
+            'author': new_author,
+            'year': int(new_year),
+            'rating': float(new_rating),
+            'pages': int(new_pages)
+        }
+        print(book_dictionary)
+
+def remove_book():
+    with open('library.txt', 'r') as f:
+        file = f.readlines()
+        deleteLine = int(input("Enter the book number to be deleted: "))
+        line_index = 1
+        with open ("library.txt", 'w') as f:
+            for line in file:
+                if line_index != deleteLine:
+                    f.write(line)
+                line_index += 1
+    print(f'Book was deleted.')
+
+    
+
+
+
+def main_menu():
+    print('Menu:\n 1: Create a new entry\n 2: View all books\n 3: Delete book\n')
+    try:
+        navigation = input('What would you like to do?')
+    except:
+        navigation = input('Please enter a number for what you would like to do.')
+    if navigation == '1':
+        new_book()
+    elif navigation == '2':
+        open_library()
+    elif navigation == '3':
+        remove_book()
+
+
+
 
 ### Step 2 - Read data from a .txt
 
@@ -23,3 +90,6 @@
 
 ## Now follow the instructions in this final step. Expand your project. Clean up the code. Make your application functional. Great job getting your first Python application finished!
 
+
+if __name__ == "__main__":
+    main_menu()
