@@ -78,13 +78,29 @@ def get_ratings():
                 }
                 if book_dictionary['rating'] >= get_rating:
                     print(book_dictionary)
+
+def book_length():
+    with open('library.txt', 'r') as f:
+            file = f.readlines()
+            get_length = int(input("Enter the length of the books you want to read: "))
+            for line in file:
+                new_title, new_author, new_year, new_rating, new_pages = line.split(', ')
+                book_dictionary = {
+                    'title': new_title,
+                    'author': new_author,
+                    'year': int(new_year),
+                    'rating': float(new_rating),
+                    'pages': int(new_pages)
+                }
+                if book_dictionary['pages'] >= get_length:
+                    print(book_dictionary)
        
              
 
 
 
 def main_menu():
-    print('Menu:\n 1: Create a new entry\n 2: View all books\n 3: Delete book\n 4: Get book based on ratings\n')
+    print('Menu:\n 1: Create a new entry\n 2: View all books\n 3: Delete book\n 4: Get book based on ratings\n 5: Get books based on length\n')
     try:
         navigation = input('What would you like to do?')
     except:
@@ -97,7 +113,9 @@ def main_menu():
         remove_book()
     elif navigation == '4':
         get_ratings()  
-
+    elif navigation == '5':
+        book_length()
+        
 
 
 
