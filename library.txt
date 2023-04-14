@@ -1,2 +1,4 @@
 book, book, 1000, 1.0, 111
 book3, book3, 3000, 3.0, 333
+jumanji, monkey, 1982, 3.0, 300
+beeg yoshi, beeg luigi, 2420, 4.6, 420

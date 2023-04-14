@@ -4,6 +4,8 @@
 
 # Code here
 
+library = []
+
 def new_book():
     new_title = input('What is the name of the book you want to add?')
     new_author = input('What is the name of the author of the book?')
@@ -20,6 +22,15 @@ def new_book():
     except:
         new_pages = int(input('Enter a number for the amount of pages in the book. '))
 
+    book_dictionary = {
+        'title': new_title,
+        'author': new_author,
+        'year': int(new_year),
+        'rating': float(new_rating),
+        'pages': int(new_pages)
+    }
+
+    library.append(book_dictionary)
 
     with open ("library.txt", 'a') as f:
         f.write(f'{new_title}, {new_author}, {new_year}, {new_rating}, {new_pages}\n')
@@ -52,12 +63,28 @@ def remove_book():
                 line_index += 1
     print(f'Book was deleted.')
 
-    
+def get_ratings():
+         with open('library.txt', 'r') as f:
+            file = f.readlines()
+            get_rating = int(input("Enter the books ratings you would like to see: "))
+            for line in file:
+                new_title, new_author, new_year, new_rating, new_pages = line.split(', ')
+                book_dictionary = {
+                    'title': new_title,
+                    'author': new_author,
+                    'year': int(new_year),
+                    'rating': float(new_rating),
+                    'pages': int(new_pages)
+                }
+                if book_dictionary['rating'] >= get_rating:
+                    print(book_dictionary)
+       
+             
 
 
 
 def main_menu():
-    print('Menu:\n 1: Create a new entry\n 2: View all books\n 3: Delete book\n')
+    print('Menu:\n 1: Create a new entry\n 2: View all books\n 3: Delete book\n 4: Get book based on ratings\n')
     try:
         navigation = input('What would you like to do?')
     except:
@@ -68,6 +95,8 @@ def main_menu():
         open_library()
     elif navigation == '3':
         remove_book()
+    elif navigation == '4':
+        get_ratings()  
 
 
 
